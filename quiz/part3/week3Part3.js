@@ -147,6 +147,41 @@ function countProfit(shoppers) {
                    ];
 
   // you can only write your code here!
+
+  // looping for data buyer :
+  let nameBuyer = [[],[],[]];
+  let amount = [listBarang[0][2], listBarang[1][2], listBarang[2][2]];
+  // let nameBuyerZoro = [];
+  let amountZoro = listBarang[1][2];
+  // let nameBuyerUniklooh = [];
+  let amountUniklooh = listBarang[2][2];
+  for (i = 0; i < shoppers.length; i++) {
+    if (shoppers[i].product == listBarang[0][0] && amount[0] >= shoppers[i].amount) {
+      nameBuyer[0].push(shoppers[i].name);
+      amount[0] -= shoppers[i].amount; 
+    } else if (shoppers[i].product == listBarang[1][0] && amount[1] >= shoppers[i].amount) {
+      nameBuyer[1].push(shoppers[i].name);
+      amount[1] -= shoppers[i].amount;
+    } else if (shoppers[i].product == listBarang[2][0] && amount[2] >= shoppers[i].amount) {
+      nameBuyer[2].push(shoppers[i].name);
+      amount[2] -= shoppers[i].amount;
+    }
+  }
+  console.log(nameBuyer);
+  console.log(amount);
+
+  // // looping for data sale X
+  let profit = [];
+  for (i = 0; i < listBarang.length; i++) {
+      let data = {
+        'product': listBarang[i][0],
+        'shoppers': nameBuyer[i],
+        'leftOver': amount[i],
+        'totalProfit': (listBarang[i][2] - amount[i]) * listBarang[i][1],
+      }
+      profit.push(data);
+  }
+  return profit;
 }
 
 // TEST CASES
